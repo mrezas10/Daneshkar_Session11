@@ -131,19 +131,28 @@ console.log(foodFour)
 
 function isEqual (obj1 , obj2)
 {
-    if (obj1.length !== obj2.length)
+    if (Object.keys(obj1).length !== Object.keys(obj1).length)
         return false;
     else
     {
         for (let key in obj1)
         {
-            if (obj1[key] !== obj2[key])
+            if (obj1[key].length !== undefined || Object.keys(obj1[key]).length !== undefined)
+            {
+                for (let i in obj1[key])
+                {
+                    if (obj1[key][i] !== obj2[key][i])
+                        return false
+                }
+            }
+            else if (obj1[key] !== obj2[key])
             {
                 return false
             }
         }
+        return true
     }
-    return true
+
 }
 
 function isSame (obj1 , obj2)
@@ -152,6 +161,14 @@ function isSame (obj1 , obj2)
 }
 
 const obj1 = {
+    key0: false,
+    key1: 'val1',
+    key2: 20,
+    key3: [0, 1, 2],
+    key4: {name: 'mohammad'}
+}
+
+const obj6 = {
     key0: false,
     key1: 'val1',
     key2: 20,
@@ -169,9 +186,9 @@ const obj3 = {
 
 const obj4 = obj3;
 
-console.log(isEqual(obj1 , obj2))
-console.log(isEqual(obj1 , obj3))
-console.log(isSame(obj1 , obj2))
-console.log(isSame(obj3 , obj4))
+console.log(isEqual(obj1 , obj6))
+// console.log(isEqual(obj1 , obj3))
+// console.log(isSame(obj1 , obj2))
+// console.log(isSame(obj3 , obj4))
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
